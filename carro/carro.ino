@@ -27,104 +27,100 @@ void setup() {
   pinMode(Pin_3, OUTPUT);     
   pinMode(Pin_4, OUTPUT);    
   pinMode(Pin_5, OUTPUT); 
-  
 }
 
 void loop() {
- // Esperamos 1 segundo
- // delay(1000);
   cronometro();
 
-    if(mySerial.available()){
-      inputByte = mySerial.read();
-      if(inputByte == 'M'){
-        grabar_u == true;
-      }else if(inputByte == 'm'){
-        grabar_u == false;
-      }
+  if(mySerial.available()){
+    inputByte = mySerial.read();
 
-      if(inputByte == 'N'){
-        ejecutar_w == true;
-      }else if('n'){
-        ejecutar_w == false;
-      }
+    if(inputByte == 'M'){
+      grabar_u == true;
+    }else if(inputByte == 'm'){
+      grabar_u == false;
+    }
 
-      if(grabar_u == true){
-          Serial.println(inputByte);
-          movimiento(inputByte);
-          if(inputByte == 'S'){
-            move.agregar(ul, contador);
-          }
-          contador = 0;
-      }
+    if(inputByte == 'N'){
+      ejecutar_w == true;
+    }else if('n'){
+      ejecutar_w == false;
+    }
 
-      if(ejecutar_w == true){
-          move.presentarF();
-      }
-
+    if(grabar_u == true){
       Serial.println(inputByte);
       movimiento(inputByte);
-          
-      //move.agregar(ul, contador);
+      if(inputByte == 'S'){
+        move.agregar(ul, contador);
+      }
       contador = 0;
-      ul = inputByte;    
-   }
-   
+    }
+
+    if(ejecutar_w == true){
+      move.presentarF();
+    }
+
+    Serial.println(inputByte);
+    movimiento(inputByte);
+        
+    contador = 0;
+    ul = inputByte;    
+  }
 }
 void movimiento(char m){
-    if(m=='S'){         
-       stop();
-    }
+  if(m=='S'){         
+    stop();
+  }
 
-    if(m=='B'){
-      back();
-    }
-    
-    if(m=='F'){
-      front();
-    }
+  if(m=='B'){
+    back();
+  }
 
-    if(m=='L'){
-     left();
-    }
+  if(m=='F'){
+    front();
+  }
 
-    if(m=='R'){
-      right();
-    }
+  if(m=='L'){
+    left();
+  }
+
+  if(m=='R'){
+    right();
+  }
 }
 void stop(){
-        digitalWrite(Pin_2,LOW);
-        digitalWrite(Pin_4,LOW);
-        digitalWrite(Pin_3,LOW);
-        digitalWrite(Pin_5,LOW);  
+  digitalWrite(Pin_2,LOW);
+  digitalWrite(Pin_4,LOW);
+  digitalWrite(Pin_3,LOW);
+  digitalWrite(Pin_5,LOW);  
 }
 
 void back(){
-         digitalWrite(Pin_4,HIGH);
-         digitalWrite(Pin_3,HIGH);
-      }
+  digitalWrite(Pin_4,HIGH);
+  digitalWrite(Pin_3,HIGH);
+}
 
 void front(){
-        digitalWrite(Pin_2,HIGH);
-        digitalWrite(Pin_5,HIGH);
-      }
+  digitalWrite(Pin_2,HIGH);
+  digitalWrite(Pin_5,HIGH);
+}
 
 void left(){
-        digitalWrite(Pin_5,HIGH); 
-        digitalWrite(Pin_3,HIGH);
-      }
+  digitalWrite(Pin_5,HIGH); 
+  digitalWrite(Pin_3,HIGH);
+}
 
 void right(){
-        digitalWrite(Pin_4,HIGH);
-        digitalWrite(Pin_2,HIGH);
-      }
+  digitalWrite(Pin_4,HIGH);
+  digitalWrite(Pin_2,HIGH);
+}
 
 void cronometro(){
   tiempo_actual = millis();
-    delta_tiempo = tiempo_actual - tiempo_anterior;
-    if(delta_tiempo == 1000){
-      contador = contador + 1;
-      //Serial.println(contador);
-      tiempo_anterior = tiempo_actual;
-    }
+  delta_tiempo = tiempo_actual - tiempo_anterior;
+  
+  if(delta_tiempo == 1000){
+    contador = contador + 1;
+    tiempo_anterior = tiempo_actual;
+  }
 }
