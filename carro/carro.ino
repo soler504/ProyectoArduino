@@ -34,7 +34,7 @@ void loop() {
 
   if(mySerial.available()){
     inputByte = mySerial.read();
-
+    Serial.println(inputByte);
     if(inputByte == 'M'){
       grabar_u == true;
     }else if(inputByte == 'm'){
@@ -48,7 +48,6 @@ void loop() {
     }
 
     if(grabar_u == true){
-      Serial.println(inputByte);
       movimiento(inputByte);
       if(inputByte == 'S'){
         move.agregar(ul, contador);
@@ -60,13 +59,13 @@ void loop() {
       move.presentarF();
     }
 
-    Serial.println(inputByte);
     movimiento(inputByte);
         
     contador = 0;
     ul = inputByte;    
   }
 }
+
 void movimiento(char m){
   if(m=='S'){         
     stop();
@@ -88,6 +87,7 @@ void movimiento(char m){
     right();
   }
 }
+
 void stop(){
   digitalWrite(Pin_2,LOW);
   digitalWrite(Pin_4,LOW);
@@ -118,7 +118,7 @@ void right(){
 void cronometro(){
   tiempo_actual = millis();
   delta_tiempo = tiempo_actual - tiempo_anterior;
-  
+
   if(delta_tiempo == 1000){
     contador = contador + 1;
     tiempo_anterior = tiempo_actual;
