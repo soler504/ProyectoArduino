@@ -1,6 +1,10 @@
+
+#include <Arduino.h>
 #include <SoftwareSerial.h>
 #include "Lista.h"
+
 using namespace std;
+
 Lista::Lista(){
   I = NULL;
   F = NULL;
@@ -25,7 +29,10 @@ void Lista::agregar(char letra, int tiempo){
 void Lista::presentarF(){
   T = F;
 	while (T != NULL){
-		printf(T->letra + "-" + T->tiempo);
+		Serial.print(T->letra);
+    Serial.print("-");
+    Serial.println(T->tiempo);
+
 		T = T->ant;
 	}
 }
