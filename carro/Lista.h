@@ -1,14 +1,15 @@
-
 #include "Nodo.h"
 #define NULL 0
-class Lista
-{
+#include "Movimiento.h"
+#include <Arduino.h>
+
+class Lista{
+
 	public:
 		Lista();
-		Nodo *I, *F, *T, *A, *T2;
+		Nodo *I, *F, *T;
+    Movimiento movimient;
 		void agregar(char, int);
 		void presentarI();
 		void presentarF();
-		void buscar(int x);
-		void insertar(int x);
 };
