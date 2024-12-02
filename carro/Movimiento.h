@@ -2,23 +2,25 @@
 class Movimiento{
 
   public:
+    char ultimoMovimiento;
 
-    char ultimoMovimiento = '';
+    bool sePuedeGrabar;
+    bool sePuedeEjecutar;
 
-    bool sePuedeGrabar = false;
-    bool sePuedeEjecutar = false;
+    int Pin_2;          
+    int Pin_3;        
+    int Pin_4;
+    int Pin_5; 
 
-    int Pin_2 = 4;          
-    int Pin_3 = 2;        
-    int Pin_4 = 6;
-    int Pin_5 = 7; 
+    unsigned long tiempoInicio;
+    unsigned long tiempoDuracion;
 
-    unsigned long tiempoInicio = 0;
-    unsigned long tiempoDuracion = 0;
-
+    Movimiento();
     void moverCarrito(char letra);
     void calcularTiempoDuracion();
     void asignarValores(char letra);
+    void setupPines();
+    void setupVariables();
 
     void stop();
     void back();

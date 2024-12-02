@@ -1,5 +1,31 @@
 #include "Movimiento.h"
-void moverCarrito(char letra){
+Movimiento::Movimiento(){
+
+}
+
+void Movimiento::setupVariables(){
+  ultimoMovimiento = "";
+
+  sePuedeGrabar = false;
+  sePuedeEjecutar = false;
+
+  Pin_2 = 4;
+  Pin_3 = 2;
+  Pin_4 = 6;
+  Pin_5 = 7;
+
+  tiempoInicio = 0;
+  tiempoDuracion = 0;
+}
+
+void Movimiento::setupPines(){
+  pinMode(Pin_2, OUTPUT);      
+  pinMode(Pin_3, OUTPUT);     
+  pinMode(Pin_4, OUTPUT);    
+  pinMode(Pin_5, OUTPUT); 
+}
+
+void Movimiento::moverCarrito(char letra){
   if(letra=='S'){
     stop();
     calcularTiempoDuracion();
@@ -24,40 +50,58 @@ void moverCarrito(char letra){
     asignarValores(letra);
     right();
   }
+
+  if(letra == 'M'){
+    sePuedeGrabar = true;
+    sePuedeEjecutar = false;
+  }
+
+  if(letra == 'm'){
+    sePuedeGrabar = false;
+  }
+
+  if(letra == 'N'){
+    sePuedeGrabar = false;
+    sePuedeEjecutar = true;
+  }
+
+  if(letra == 'n'){
+    sePuedeEjecutar = false;
+  }
 }
 
-void calcularTiempoDuracion(){
+void Movimiento::calcularTiempoDuracion(){
   tiempoDuracion = millis() - tiempoInicio;
 }
 
-void asignarValores(char letra){
+void Movimiento::asignarValores(char letra){
   tiempoInicio = millis();
   ultimoMovimiento = letra;
 }
 
-void stop(){
+void Movimiento::stop(){
   digitalWrite(Pin_2,LOW);
   digitalWrite(Pin_4,LOW);
   digitalWrite(Pin_3,LOW);
   digitalWrite(Pin_5,LOW);  
 }
 
-void back(){
+void Movimiento::back(){
   digitalWrite(Pin_4,HIGH);
   digitalWrite(Pin_3,HIGH);
 }
 
-void front(){
+void Movimiento::front(){
   digitalWrite(Pin_2,HIGH);
   digitalWrite(Pin_5,HIGH);
 }
 
-void left(){
+void Movimiento::left(){
   digitalWrite(Pin_5,HIGH); 
   digitalWrite(Pin_3,HIGH);
 }
 
-void right(){
+void Movimiento::right(){
   digitalWrite(Pin_4,HIGH);
   digitalWrite(Pin_2,HIGH);
-}s
+}
