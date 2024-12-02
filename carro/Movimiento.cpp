@@ -1,40 +1,49 @@
 #include "Movimiento.h"
-void Movimiento::movimiento(char m){
 
-  if(m == 'S'){         
+void Movimiento::moverCarrito(char letra){
+
+  if(letra == 'S'){         
     stop();
   }
-  if(m == 'B'){
+
+  if(letra == 'B'){
     tiempo_anterior = millis();
-    ultimaLetra = m;
+    ultimaLetra = letra;
     back();
   }
-  if(m == 'F'){
+
+  if(letra == 'F'){
     tiempo_anterior = millis();
-    ultimaLetra = m;
+    ultimaLetra = letra;
     front();
   }
-  if(m == 'L'){
+
+  if(letra == 'L'){
     tiempo_anterior = millis();
-    ultimaLetra = m;
+    ultimaLetra = letra;
     left();
   }
-  if(m == 'R'){
+
+  if(letra == 'R'){
     tiempo_anterior = millis();
-    ultimaLetra = m;
+    ultimaLetra = letra;
     right();
   }
-  if(m == 'M'){
-    grabar_u = true;
+
+  if(letra == 'M'){
+    sePuedeGrabar = true;
   }
-  if(m == 'm'){
-    grabar_u = false;
+
+  if(letra == 'm'){
+    sePuedeGrabar = false;
   }
-  if(m == 'N'){
-    ejecutar_w = true;
+
+  if(letra == 'N'){
+    sePuedeEjecutar = true;
   }
-  if(m == 'n'){
-    ejecutar_w = false;
+
+  if(letra == 'n'){
+    sePuedeEjecutar = false;
   }
 }
 

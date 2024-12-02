@@ -3,16 +3,17 @@
 
 SoftwareSerial mySerial(11,10);  
 char inputByte;
-Lista  lista;
+Lista lista;
 
 void setup() {
   
   mySerial.begin(9600);
   Serial.begin(9600);
-  pinMode(lista.movimient.Pin_2, OUTPUT);      
-  pinMode(lista.movimient.Pin_3, OUTPUT);     
-  pinMode(lista.movimient.Pin_4, OUTPUT);    
-  pinMode(lista.movimient.Pin_5, OUTPUT); 
+
+  pinMode(lista.movimiento.Pin_2, OUTPUT);      
+  pinMode(lista.movimiento.Pin_3, OUTPUT);     
+  pinMode(lista.movimiento.Pin_4, OUTPUT);    
+  pinMode(lista.movimiento.Pin_5, OUTPUT); 
   
 }
 
@@ -22,19 +23,17 @@ void loop() {
 
     inputByte = mySerial.read();
     Serial.println(inputByte);
-    lista.movimient.movimiento(inputByte);
-    if(lista.movimient.grabar_u == true && inputByte == 'S'){
-      
-      lista.movimient.cronometro();
-      lista.agregar(lista.movimient.ultimaLetra, lista.movimient.contador);
+    lista.movimiento.moverCarrito(inputByte);
 
+    if(lista.movimiento.sePuedeGrabar == true && inputByte == 'S'){
+      lista.movimiento.cronometro();
+      lista.agregar(lista.movimiento.ultimaLetra, lista.movimiento.contador);
     }
-    lista.movimient.contador = 0;
-    if(lista.movimient.ejecutar_w == true ){
 
-      lista.movimient.ejecutar_w = false;
+    lista.movimiento.contador = 0;
+    if(lista.movimiento.sePuedeEjecutar == true ){
+      lista.movimiento.sePuedeEjecutar = false;
       lista.presentarI();
-  
     }
   }
 }

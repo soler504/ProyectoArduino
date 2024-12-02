@@ -1,3 +1,6 @@
+#ifndef MOVIMIENTO_H
+#define MOVIMIENTO_H
+
 #include <Arduino.h>
 class Movimiento{
 
@@ -6,8 +9,8 @@ class Movimiento{
     int contador = 0;
     char ultimaLetra;
 
-    bool grabar_u = false;
-    bool ejecutar_w = false;
+    bool sePuedeGrabar = false;
+    bool sePuedeEjecutar = false;
 
     int Pin_2 = 4;          
     int Pin_3 = 2;        
@@ -18,12 +21,13 @@ class Movimiento{
     unsigned long tiempo_anterior = 0;
     unsigned long delta_tiempo;
 
-    void movimiento(char m);
+    void moverCarrito(char);
     void stop();
     void back();
     void front();
     void left();
     void right();
     void cronometro();
-    
 };
+
+#endif

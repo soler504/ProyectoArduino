@@ -35,9 +35,10 @@ void Lista::presentarI(){
     Serial.print(T->letra);
     Serial.print(" - ");
     Serial.println(T->tiempo);
-    movimient.movimiento(T->letra);
+    
+    movimiento.moverCarrito(T->letra);
     delay(T->tiempo);
-    movimient.movimiento('S');
+    movimiento.moverCarrito('S');
 		T = T->sig;
 
 	}
@@ -49,17 +50,17 @@ void Lista::presentarI(){
     Serial.println(T->tiempo);
     switch(T->letra){
       case 'L':
-        movimient.movimiento('R');
+        movimiento.moverCarrito('R');
         break;
       case 'R':
-        movimient.movimiento('L');
+        movimiento.moverCarrito('L');
         break;
       default:
-        movimient.movimiento(T->letra);
+        movimiento.moverCarrito(T->letra);
         break;
     }
     delay(T->tiempo);
-    movimient.movimiento('S');
+    movimiento.moverCarrito('S');
 		T = T->ant;
 	}
   Serial.println("Final");

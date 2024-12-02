@@ -1,3 +1,6 @@
+#ifndef NODO_H
+#define NODO_H
+
 class Nodo{
 
   public: 
@@ -7,3 +10,5 @@ class Nodo{
     Nodo *sig;
     Nodo *ant;
 };
+
+#endif
