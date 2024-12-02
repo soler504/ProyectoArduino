@@ -1,10 +1,4 @@
-#include <Arduino.h>
-#include <SoftwareSerial.h>
 #include "Lista.h"
-#include "Movimiento.h"
-
-using namespace std;
-Movimiento move;
 
 Lista::Lista(){
   I = NULL;
@@ -31,6 +25,9 @@ void Lista::agregar(char letra, int tiempo){
 void Lista::presentarI(){
   T = I;
 	while (T != NULL){
+    Serial.println(T->letra);  
+    Serial.println(T->tiempo); 
+
     move.moverCarrito(T->letra);
     delay(T->tiempo);
 		T = T->sig;

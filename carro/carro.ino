@@ -6,38 +6,37 @@ SoftwareSerial mySerial(11,10);
 
 char inputByte = "";
 Lista listaDoblementeEnlazada;
-Movimiento movimiento;
-
 void setup() {
   mySerial.begin(9600);
   Serial.begin(9600);
   
-  movimiento.setupVariables();
-  movimiento.setupPines();
+  listaDoblementeEnlazada.move.setupVariables();
+  listaDoblementeEnlazada.move.setupPines();
 }
 
 void loop() {
    if(mySerial.available()){
       inputByte = mySerial.read();
       
-      movimiento.moverCarrito(inputByte);
-      if(movimiento.sePuedeGrabar && inputByte == 'S'){
+      listaDoblementeEnlazada.move.moverCarrito(inputByte);
+      if(listaDoblementeEnlazada.move.sePuedeGrabar && inputByte == 'S'){
         guardarValorEnLista();
       }
 
-      if(movimiento.sePuedeEjecutar){
+      if(listaDoblementeEnlazada.move.sePuedeEjecutar){
         listaDoblementeEnlazada.presentarI();
+        listaDoblementeEnlazada.move.sePuedeEjecutar = false;
       }
    }
 }
 
 void guardarValorEnLista(){
-  if((movimiento.ultimoMovimiento=='B' || movimiento.ultimoMovimiento=='F' || 
-    movimiento.ultimoMovimiento=='L' || movimiento.ultimoMovimiento=='R') && 
-    movimiento.tiempoDuracion >0){
+  if((listaDoblementeEnlazada.move.ultimoMovimiento=='B' || listaDoblementeEnlazada.move.ultimoMovimiento=='F' || 
+    listaDoblementeEnlazada.move.ultimoMovimiento=='L' || listaDoblementeEnlazada.move.ultimoMovimiento=='R') && 
+    listaDoblementeEnlazada.move.tiempoDuracion >0){
  
     // Serial.println(movimiento.tiempoDuracion);  
     // Serial.println(movimiento.ultimoMovimiento); 
-    listaDoblementeEnlazada.agregar(movimiento.ultimoMovimiento, movimiento.tiempoDuracion);
+    listaDoblementeEnlazada.agregar(listaDoblementeEnlazada.move.ultimoMovimiento, listaDoblementeEnlazada.move.tiempoDuracion);
   }
 }

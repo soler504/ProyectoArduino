@@ -1,3 +1,6 @@
+#ifndef MOVIMIENTO_H
+#define MOVIMIENTO_H
+
 #include <Arduino.h>
 class Movimiento{
 
@@ -28,3 +31,5 @@ class Movimiento{
     void left();
     void right();
 };
+
+#endif
