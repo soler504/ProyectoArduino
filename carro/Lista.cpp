@@ -1,10 +1,10 @@
 #include "Lista.h"
 
 Lista::Lista(){
-  limpiarVariables();
+  limpiarPunteros();
 }
 
-void Lista::limpiarVariables(){
+void Lista::limpiarPunteros(){
   I = NULL;
   F = NULL;
   T = NULL;
@@ -41,12 +41,19 @@ void Lista::presentarI(){
     movimiento.moverCarrito('S');
 		T = T->sig;
 	}
-/*
+
+  delay(2000);
+  movimiento.moverCarrito('S');
+  presentarF();
+}
+
+void Lista::presentarF(){
   T = F->ant;
   while (T != NULL){
     Serial.print(T->letra);
     Serial.print(" - ");
     Serial.println(T->tiempo);
+
     switch(T->letra){
       case 'L':
         movimiento.moverCarrito('R');
@@ -62,7 +69,5 @@ void Lista::presentarI(){
     movimiento.moverCarrito('S');
 		T = T->ant;
 	}
-  Serial.println("Final");
-	*/
-  
+  Serial.println("Final");  
 }

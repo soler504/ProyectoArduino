@@ -1,5 +1,18 @@
 #include "Movimiento.h"
 
+Movimiento::Movimiento(){
+  sePuedeGrabar = false;
+  sePuedeEjecutar = false;
+
+  Pin_2 = 4;          
+  Pin_3 = 2;        
+  Pin_4 = 6;
+  Pin_5 = 7;
+
+  tiempoInicial = 0;
+  tiempoTranscurrido = 0;
+}
+
 void Movimiento::moverCarrito(char letra){
 
   if(letra == 'S'){         
@@ -44,7 +57,7 @@ void Movimiento::moverCarrito(char letra){
 }
 
 void Movimiento::inicializarVariables(char letra){
-  tiempo_anterior = millis();
+  tiempoInicial = millis();
   ultimaLetra = letra;
 }
 
@@ -86,7 +99,6 @@ void Movimiento::right(){
 }
 void Movimiento::cronometro(){
 
-  tiempo_actual = millis();
-  delta_tiempo = tiempo_actual - tiempo_anterior;
+  tiempoTranscurrido = millis() - tiempoInicial;
 
 }

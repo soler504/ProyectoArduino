@@ -7,18 +7,18 @@ class Movimiento{
   public:
     char ultimaLetra;
 
-    bool sePuedeGrabar = false;
-    bool sePuedeEjecutar = false;
+    bool sePuedeGrabar;
+    bool sePuedeEjecutar;
 
-    int Pin_2 = 4;          
-    int Pin_3 = 2;        
-    int Pin_4 = 6;
-    int Pin_5 = 7;
+    int Pin_2;          
+    int Pin_3;        
+    int Pin_4;
+    int Pin_5;
 
-    unsigned long tiempo_actual;
-    unsigned long tiempo_anterior = 0;
-    unsigned long delta_tiempo;
+    unsigned long tiempoInicial;
+    unsigned long tiempoTranscurrido;
 
+    Movimiento();
     void inicializarVariables(char);
     void moverCarrito(char);
     void stop();

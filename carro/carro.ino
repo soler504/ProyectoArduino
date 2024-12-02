@@ -24,14 +24,14 @@ void loop() {
     inputByte = mySerial.read();
     //Serial.print(inputByte);
     if(inputByte == 'X'){
-      lista.limpiarVariables();
+      lista.limpiarPunteros();
     }
 
     lista.movimiento.moverCarrito(inputByte);
 
     if(lista.movimiento.sePuedeGrabar == true && inputByte == 'S'){
       lista.movimiento.cronometro();
-      lista.agregar(lista.movimiento.ultimaLetra, lista.movimiento.delta_tiempo);
+      lista.agregar(lista.movimiento.ultimaLetra, lista.movimiento.tiempoTranscurrido);
     }
 
     if(lista.movimiento.sePuedeEjecutar == true ){

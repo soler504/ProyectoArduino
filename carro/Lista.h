@@ -6,16 +6,17 @@
 #include <Arduino.h>
 
 class Lista{
+  private:
+    Nodo *I, *F, *T;
 
 	public:
-		Lista();
-		Nodo *I, *F, *T;
     Movimiento movimiento;
-    
+
+    Lista();
 		void agregar(char, int);
 		void presentarI();
 		void presentarF();
-    void limpiarVariables()
+    void limpiarPunteros();
 };
 
 #endif
