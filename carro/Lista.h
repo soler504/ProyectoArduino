@@ -7,7 +7,7 @@ class Lista
 {
 	public:
 		Lista();
-		Nodo *I, *F, *T, *A, *T2;
+		Nodo *I, *F, *T;
 		void agregar(char, int);
 		void presentarI();
 		void presentarF();
