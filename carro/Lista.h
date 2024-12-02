@@ -11,8 +11,6 @@ class Lista
 		void agregar(char, int);
 		void presentarI();
 		void presentarF();
-		void buscar(int x);
-		void insertar(int x);
 };
 
 #endif
