@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include "Lista.h"
@@ -30,10 +29,8 @@ void Lista::agregar(char letra, int tiempo){
 void Lista::presentarF(){
   T = F;
 	while (T != NULL){
-		Serial.print(T->letra);
-    Serial.print("-");
-    Serial.println(T->tiempo);
 
 		T = T->ant;
 	}
 }
+

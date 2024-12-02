@@ -3,22 +3,19 @@
 
 SoftwareSerial mySerial(11,10);  
 char inputByte = "";
-char ul = "";
-bool grabar_u=false;
-bool ejecutar_w=false;
+bool sePuedeGrabar = false;
+bool sePuedeEjecutar = false;
 
 int Pin_2 = 4;          
 int Pin_3 = 2;        
 int Pin_4 = 6;
 int Pin_5 = 7;
 
-Lista  move;
-unsigned long tiempo_actual;
-unsigned long tiempo_anterior = 0;
-unsigned long delta_tiempo;
+Lista  listaDoblementeEnlazada;
+unsigned long tiempoInicio = 0;
+unsigned long tiempoDuracion = 0;
+char ultimoMovimiento = 'S';
 
-int contador = 0;
-int opcion = 0;
 
 void setup() {
   mySerial.begin(9600);
@@ -30,62 +27,68 @@ void setup() {
 }
 
 void loop() {
-  cronometro();
 
-  if(mySerial.available()){
-    inputByte = mySerial.read();
-    Serial.println(inputByte);
-    if(inputByte == 'M'){
-      grabar_u == true;
-    }else if(inputByte == 'm'){
-      grabar_u == false;
-    }
-
-    if(inputByte == 'N'){
-      ejecutar_w == true;
-    }else if('n'){
-      ejecutar_w == false;
-    }
-
-    if(grabar_u == true){
-      movimiento(inputByte);
-      if(inputByte == 'S'){
-        move.agregar(ul, contador);
+   if(mySerial.available()){
+      inputByte = mySerial.read();
+      
+      if(inputByte == 'M'){
+        sePuedeGrabar = true;
+        sePuedeEjecutar = false;
       }
-      contador = 0;
-    }
 
-    if(ejecutar_w == true){
-      move.presentarF();
-    }
+      if(inputByte == 'N'){
+        sePuedeGrabar = false;
+        sePuedeEjecutar = true;
+      }
 
-    movimiento(inputByte);
-        
-    contador = 0;
-    ul = inputByte;    
+      if(sePuedeGrabar){
+        moverCarrito(inputByte);
+      }
+   }
+}
+
+void guardarValorEnLista(){
+  if((ultimoMovimiento=='B' || ultimoMovimiento=='F' || ultimoMovimiento=='L' || ultimoMovimiento=='R') && 
+    tiempoDuracion >0){
+    listaDoblementeEnlazada.agregar(ultimoMovimiento, tiempoDuracion);
   }
 }
 
-void movimiento(char m){
-  if(m=='S'){         
+void moverCarrito(char letra){
+  if(letra=='S'){
     stop();
+    calcularTiempoDuracion();
+    guardarValorEnLista();
   }
 
-  if(m=='B'){
+  if(letra=='B'){
+    asignarValores(letra);
     back();
   }
 
-  if(m=='F'){
+  if(letra=='F'){
+    asignarValores(letra);
     front();
   }
 
-  if(m=='L'){
+  if(letra=='L'){
+    asignarValores(letra);
     left();
   }
 
-  if(m=='R'){
+  if(letra=='R'){
+    asignarValores(letra);
     right();
   }
+}
+
+void calcularTiempoDuracion(){
+  tiempoDuracion = millis() - tiempoInicio;
+}
+
+void asignarValores(char letra){
+  tiempoInicio = millis();
+  ultimoMovimiento = letra;
 }
 
 void stop(){
@@ -113,14 +116,4 @@ void left(){
 void right(){
   digitalWrite(Pin_4,HIGH);
   digitalWrite(Pin_2,HIGH);
-}
-
-void cronometro(){
-  tiempo_actual = millis();
-  delta_tiempo = tiempo_actual - tiempo_anterior;
-
-  if(delta_tiempo == 1000){
-    contador = contador + 1;
-    tiempo_anterior = tiempo_actual;
-  }
 }
