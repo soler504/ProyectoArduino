@@ -21,6 +21,7 @@ class Movimiento{
     unsigned long tiempo_anterior = 0;
     unsigned long delta_tiempo;
 
+    void inicializarVariables();
     void moverCarrito(char);
     void stop();
     void back();

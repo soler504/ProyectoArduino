@@ -7,26 +7,22 @@ void Movimiento::moverCarrito(char letra){
   }
 
   if(letra == 'B'){
-    tiempo_anterior = millis();
-    ultimaLetra = letra;
+    inicializarVariables();
     back();
   }
 
   if(letra == 'F'){
-    tiempo_anterior = millis();
-    ultimaLetra = letra;
+    inicializarVariables();
     front();
   }
 
   if(letra == 'L'){
-    tiempo_anterior = millis();
-    ultimaLetra = letra;
+    inicializarVariables();
     left();
   }
 
   if(letra == 'R'){
-    tiempo_anterior = millis();
-    ultimaLetra = letra;
+    inicializarVariables();
     right();
   }
 
@@ -45,6 +41,11 @@ void Movimiento::moverCarrito(char letra){
   if(letra == 'n'){
     sePuedeEjecutar = false;
   }
+}
+
+void Movimiento::inicializarVariables(){
+  tiempo_anterior = millis();
+  ultimaLetra = letra;
 }
 
 void Movimiento::stop(){

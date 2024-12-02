@@ -22,7 +22,6 @@ void loop() {
   if(mySerial.available()){
 
     inputByte = mySerial.read();
-    Serial.println(inputByte);
     lista.movimiento.moverCarrito(inputByte);
 
     if(lista.movimiento.sePuedeGrabar == true && inputByte == 'S'){
