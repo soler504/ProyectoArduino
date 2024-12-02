@@ -11,9 +11,11 @@ class Lista{
 		Lista();
 		Nodo *I, *F, *T;
     Movimiento movimiento;
+    
 		void agregar(char, int);
 		void presentarI();
 		void presentarF();
+    void limpiarVariables()
 };
 
 #endif

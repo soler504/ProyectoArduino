@@ -22,14 +22,18 @@ void loop() {
   if(mySerial.available()){
 
     inputByte = mySerial.read();
+    //Serial.print(inputByte);
+    if(inputByte == 'X'){
+      lista.limpiarVariables();
+    }
+
     lista.movimiento.moverCarrito(inputByte);
 
     if(lista.movimiento.sePuedeGrabar == true && inputByte == 'S'){
       lista.movimiento.cronometro();
-      lista.agregar(lista.movimiento.ultimaLetra, lista.movimiento.contador);
+      lista.agregar(lista.movimiento.ultimaLetra, lista.movimiento.delta_tiempo);
     }
 
-    lista.movimiento.contador = 0;
     if(lista.movimiento.sePuedeEjecutar == true ){
       lista.movimiento.sePuedeEjecutar = false;
       lista.presentarI();

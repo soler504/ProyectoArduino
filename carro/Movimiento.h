@@ -5,8 +5,6 @@
 class Movimiento{
 
   public:
-
-    int contador = 0;
     char ultimaLetra;
 
     bool sePuedeGrabar = false;
@@ -21,7 +19,7 @@ class Movimiento{
     unsigned long tiempo_anterior = 0;
     unsigned long delta_tiempo;
 
-    void inicializarVariables();
+    void inicializarVariables(char);
     void moverCarrito(char);
     void stop();
     void back();

@@ -1,11 +1,13 @@
 #include "Lista.h"
 
 Lista::Lista(){
+  limpiarVariables();
+}
 
+void Lista::limpiarVariables(){
   I = NULL;
   F = NULL;
   T = NULL;
-  
 }
 
 void Lista::agregar(char letra, int tiempo){
@@ -20,18 +22,16 @@ void Lista::agregar(char letra, int tiempo){
 	}else{
     F -> sig = T;
     T -> ant = F;
-		
 	}
 	F = T;
 
 }
 
 void Lista::presentarI(){
+  Serial.println("Aqui empieza la lista");
 
   T = I;
-  Serial.println("Aqui empieza la lista");
 	while (T != NULL){
-
     Serial.print(T->letra);
     Serial.print(" - ");
     Serial.println(T->tiempo);
@@ -40,7 +40,6 @@ void Lista::presentarI(){
     delay(T->tiempo);
     movimiento.moverCarrito('S');
 		T = T->sig;
-
 	}
 /*
   T = F->ant;
